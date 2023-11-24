@@ -1,7 +1,7 @@
 import exppress from 'express';
+import categoryFileUpload from '../config/categoryUpload.js';
 import { createCategoryCtrl, getAllCategoriesCtrl, getSingleCategoryCtrl, updateCategoryCtrl, deleteCategoryCtrl } from '../controllers/categoriesCtrl.js';
 import { isLoggedIn } from "../middlewares/isLoggedIn.js";
-import categoryFileUpload from '../config/categoryUpload.js';
 import isAdmin from '../middlewares/isAdmin.js';
 
 
