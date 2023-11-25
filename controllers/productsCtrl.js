@@ -48,6 +48,9 @@ export const createProductCtrl = asyncHandler(async (req, res) => {
         price,
         totalQty,
         brand,
+        title,
+        ratingCount,
+        ratingStar,
     });
     // push the product into category
     categoryFound.products.push(product._id);
@@ -80,6 +83,27 @@ export const getProductsCtrl = asyncHandler(async (req, res) => {
     if (req.query.name) {
         productQuery = productQuery.find({
             name: { $regex: req.query.name, $options: "i" },
+        });
+    }
+
+    //search by title 
+    if (req.query.title) {
+        productQuery = productQuery.find({
+            title: { $regex: req.query.title, $options: "i" },
+        });
+    }
+
+    //search by rating count
+    if (req.query.ratingCount) {
+        productQuery = productQuery.find({
+            ratingCount: { $regex: req.query.ratingCount, $options: "i" },
+        });
+    }
+
+    //search by rating star
+    if (req.query.ratingStar) {
+        productQuery = productQuery.find({
+            ratingStar: { $regex: req.query.ratingStar, $options: "i" },
         });
     }
 
@@ -195,6 +219,8 @@ export const updateProductCtrl = asyncHandler(async (req, res) => {
         price,
         totalQty,
         brand,
+        ratingCount,
+        ratingStar,
     } = req.body;
 
     //update
@@ -208,6 +234,8 @@ export const updateProductCtrl = asyncHandler(async (req, res) => {
         price,
         totalQty,
         brand,
+        ratingCount,
+        ratingStar,
     }, {
         new: true,
     })

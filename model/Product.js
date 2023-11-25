@@ -8,7 +8,19 @@ const ProductSchema = new Schema(
             type: String,
             required: true,
         },
+        title: {
+            type: String,
+            required: true,
+        },
         description: {
+            type: String,
+            required: true,
+        },
+        ratingCount: {
+            type: String,
+            required: true,
+        },
+        ratingStar: {
             type: String,
             required: true,
         },
