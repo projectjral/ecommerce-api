@@ -10,7 +10,7 @@ import Brand from "../model/Brand.js";
 export const createProductCtrl = asyncHandler(async (req, res) => {
     console.log(req.files);
 
-    const { name, description, category, sizes, colors, price, totalQty, brand, title, ratingCount, ratingStar } = req.body;
+    const { name, description, category, sizes, colors, price, totalQty, brand, title } = req.body;
 
     const convertedImgs = req.files.map((file) => file?.path);
 
@@ -52,8 +52,6 @@ export const createProductCtrl = asyncHandler(async (req, res) => {
         totalQty,
         brand,
         title,
-        ratingCount,
-        ratingStar,
         images: convertedImgs,
     });
     // push the product into category
@@ -228,8 +226,6 @@ export const updateProductCtrl = asyncHandler(async (req, res) => {
         price,
         totalQty,
         brand,
-        ratingCount,
-        ratingStar,
     } = req.body;
 
     //update
@@ -243,8 +239,6 @@ export const updateProductCtrl = asyncHandler(async (req, res) => {
         price,
         totalQty,
         brand,
-        ratingCount,
-        ratingStar,
     }, {
         new: true,
     })

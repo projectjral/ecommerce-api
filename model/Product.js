@@ -16,14 +16,6 @@ const ProductSchema = new Schema(
             type: String,
             required: true,
         },
-        ratingCount: {
-            type: String,
-            required: true,
-        },
-        ratingStar: {
-            type: String,
-            required: true,
-        },
         brand: {
             type: String,
             required: true,
