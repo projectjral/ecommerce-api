@@ -95,20 +95,6 @@ export const getProductsCtrl = asyncHandler(async (req, res) => {
         });
     }
 
-    //search by rating count
-    if (req.query.ratingCount) {
-        productQuery = productQuery.find({
-            ratingCount: { $regex: req.query.ratingCount, $options: "i" },
-        });
-    }
-
-    //search by rating star
-    if (req.query.ratingStar) {
-        productQuery = productQuery.find({
-            ratingStar: { $regex: req.query.ratingStar, $options: "i" },
-        });
-    }
-
     //filter by brand 
     if (req.query.brand) {
         productQuery = productQuery.find({
@@ -179,7 +165,6 @@ export const getProductsCtrl = asyncHandler(async (req, res) => {
     //await the query
     const products = await productQuery.populate('reviews');
 
-
     res.json({
         status: "success",
         total,
@@ -241,7 +226,9 @@ export const updateProductCtrl = asyncHandler(async (req, res) => {
         brand,
     }, {
         new: true,
-    })
+        runValidators: true,
+    });
+
     res.json({
         status: 'Success',
         message: "Product Updated Successfully",
