@@ -10,7 +10,7 @@ const ProductSchema = new Schema(
         },
         title: {
             type: String,
-            required: true,
+            // required: true,
         },
         description: {
             type: String,
@@ -52,8 +52,7 @@ const ProductSchema = new Schema(
         images: [
             {
                 type: String,
-                default: "https://via.placeholder.com/150",
-                // required: true,
+                required: true,
             },
         ],
 

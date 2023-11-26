@@ -1,6 +1,6 @@
 import asyncHandler from "express-async-handler";
-import Review from "../model/Review.js";
 import Product from "../model/Product.js";
+import Review from "../model/Review.js";
 
 
 // @desc    Create new review

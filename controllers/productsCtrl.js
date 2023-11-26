@@ -10,7 +10,10 @@ import Brand from "../model/Brand.js";
 export const createProductCtrl = asyncHandler(async (req, res) => {
     console.log(req.files);
 
-    const { name, description, category, sizes, colors, price, totalQty, brand } = req.body;
+    const { name, description, category, sizes, colors, price, totalQty, brand, title, ratingCount, ratingStar } = req.body;
+
+    const convertedImgs = req.files.map((file) => file?.path);
+
     // Product Exists
     const productExists = await Product.findOne({ name });
     if (productExists) {
@@ -51,6 +54,7 @@ export const createProductCtrl = asyncHandler(async (req, res) => {
         title,
         ratingCount,
         ratingStar,
+        images: convertedImgs,
     });
     // push the product into category
     categoryFound.products.push(product._id);
@@ -192,17 +196,22 @@ export const getProductsCtrl = asyncHandler(async (req, res) => {
 // @route   Get /api/products/:id
 // @access  Public
 export const getProductCtrl = asyncHandler(async (req, res) => {
-
-    const product = await Product.findById(req.params.id).populate('reviews');
+    const product = await Product.findById(req.params.id).populate({
+        path: "reviews",
+        populate: {
+            path: "user",
+            select: "fullname",
+        },
+    });
     if (!product) {
-        throw new Error('Product not found')
+        throw new Error("Prouduct not found");
     }
     res.json({
-        status: 'Success',
-        message: "Product fetched Successfully",
+        status: "success",
+        message: "Product fetched successfully",
         product,
-    })
-})
+    });
+});
 
 // @desc    update product
 // @route   Put /api/products/:id
